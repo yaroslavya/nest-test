@@ -10,7 +10,7 @@ FROM node:latest
 COPY package.json ./
 
 ## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
-RUN npm i && mkdir /code && mv ./node_modules ./code
+RUN npm i && npm i --only=dev && mkdir /code && mv ./node_modules ./code
 #RUN mkdir -p /code
 COPY . /code
 
