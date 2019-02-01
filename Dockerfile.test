@@ -9,8 +9,10 @@ FROM node:alpine
 
 COPY package.json ./
 
+ENV NODE_ENV dev
+
 ## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
-RUN npm i && npm i --dev && mkdir /code && mv ./node_modules ./code
+RUN npm i && mkdir /code && mv ./node_modules ./code
 #RUN mkdir -p /code
 COPY . /code
 
@@ -20,4 +22,4 @@ RUN npm i -g nodemon@1.18.3
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start:dev"]
+CMD ["npm", "run", "test"]
